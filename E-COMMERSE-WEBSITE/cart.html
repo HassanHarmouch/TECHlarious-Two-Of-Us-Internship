@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HASSAN-E-Commerce Cart</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      background-color: #000;
+      color: #fff;
+      width: 100%;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header nav a {
+      color: #fff;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .logout-btn {
+      background-color: #e74c3c;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background-color: #c0392b;
+    }
+
+    main {
+      padding: 40px 10%;
+      width: 80%;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th, table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    .total-container {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .total-price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .checkout-btn {
+      background-color: #27ae60;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background-color: #219150;
+    }
+
+    .clear-cart-btn {
+      background-color: #e74c3c;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-right: 10px;
+    }
+
+    .clear-cart-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .empty-cart {
+      text-align: center;
+      font-size: 18px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HASSAN-E-Commerce-Website</h1>
+    <nav>
+      <a href="home.html" id="home">Home</a>
+      <a href="cart.html" id="cart">Cart</a>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Your Cart</h2>
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Discounted Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cart items will be dynamically inserted here -->
+      </tbody>
+    </table>
+    <div class="total-container">
+      <p>Subtotal: $<span id="subtotal">0.00</span></p>
+      <p>Discount: $<span id="discount">0.00</span></p>
+      <p>Delivery / Taxes: $<span id="taxes">0.00</span></p>
+      <p>Final Total: $<span id="final-total">0.00</span></p>
+      <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+      <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+    <div class="empty-cart" id="empty-cart-message" style="display: none;">Your cart is empty!</div>
+  </main>
+
+  <script>
+    // Initialize the cart items from localStorage
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartTableBody = document.querySelector('#cart-table tbody');
+    const subtotalElement = document.getElementById('subtotal');
+    const discountElement = document.getElementById('discount');
+    const taxesElement = document.getElementById('taxes');
+    const finalTotalElement = document.getElementById('final-total');
+    const emptyCartMessage = document.getElementById('empty-cart-message');
+
+    // Update the cart table and summary
+    function updateCart() {
+      cartTableBody.innerHTML = '';
+      let subtotal = 0;
+      let discount = 0;
+      let taxes = 0;
+
+      if (cartItems.length === 0) {
+        emptyCartMessage.style.display = 'block';
+        cartTableBody.style.display = 'none';
+        subtotalElement.textContent = '0.00';
+        discountElement.textContent = '0.00';
+        taxesElement.textContent = '0.00';
+        finalTotalElement.textContent = '0.00';
+        return;
+      } else {
+        emptyCartMessage.style.display = 'none';
+        cartTableBody.style.display = 'table-row-group';
+      }
+
+      // Loop through cart items to display them
+      cartItems.forEach((item, index) => {
+        const itemTotal = (item.price * item.quantity).toFixed(2);
+        const discountedPrice = (item.price * 0.9).toFixed(2);  // Example: 10% discount
+        const itemTotalDiscounted = (discountedPrice * item.quantity).toFixed(2);
+        subtotal += parseFloat(itemTotalDiscounted);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><img src="${item.image}" alt="${item.name}" class="cart-item" /></td>
+          <td>${item.name}</td>
+          <td>$${item.price}</td>
+          <td>$${discountedPrice}</td>
+          <td>
+            <input type="number" value="${item.quantity}" min="1" style="width: 50px;" onchange="updateQuantity(${index}, this.value)" />
+          </td>
+          <td>$${itemTotalDiscounted}</td>
+          <td><button onclick="removeFromCart(${index})">Remove</button></td>
+        `;
+        cartTableBody.appendChild(row);
+      });
+
+      // Calculate discount and taxes
+      discount = subtotal * 0.1; // 10% discount example
+      taxes = (subtotal - discount) * 0.15; // 15% tax example
+      const total = subtotal - discount + taxes;
+
+      subtotalElement.textContent = subtotal.toFixed(2);
+      discountElement.textContent = discount.toFixed(2);
+      taxesElement.textContent = taxes.toFixed(2);
+      finalTotalElement.textContent = total.toFixed(2);
+    }
+
+    // Update the quantity of a cart item
+    function updateQuantity(index, quantity) {
+      cartItems[index].quantity = parseInt(quantity, 10);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      updateCart();
+    }
+
+    // Remove a cart item
+    function removeFromCart(index) {
+      cartItems.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      updateCart();
+    }
+
+    // Clear the cart
+    function clearCart() {
+      localStorage.removeItem('cart');
+      cartItems.length = 0;
+      updateCart();
+      alert('Cart has been cleared!');
+      window.location.href = 'home.html';  // Redirect to home page after clearing cart
+    }
+
+    // Checkout the cart and redirect to checkout page
+    function checkout() {
+      if (cartItems.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      // Store cart data in localStorage for checkout
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+
+      // Redirect to the checkout page
+      window.location.href = 'checkout.html';
+    }
+
+    // Logout user
+    function logout() {
+      alert("You have logged out successfully!");
+      window.location.href = "index.html";
+    }
+
+    // Initialize the cart page
+    updateCart();
+  </script>
+</body>
+</html>
