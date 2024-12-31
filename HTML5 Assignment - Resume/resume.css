@@ -1,0 +1,138 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #f4f4f4;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0.5rem 0;
+}
+
+section {
+  margin: 5%;
+}
+
+.profileandbiography {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+.profileandbiography img {
+  flex: 1 1 150px;
+  max-width: 300px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.profileandbiography p {
+  flex: 2 1 300px;
+  font-size: 1.2rem;
+}
+
+ul {
+  padding-left: 1rem;
+}
+
+.projects div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.projectsImagesSection {
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+  flex-wrap: wrap;
+}
+
+.projectsImagesSection img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  padding: 0.5rem 1rem;
+  background-color: #5cb85c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profileandbiography {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .projects div {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  section {
+    margin: 1rem 3%;
+  }
+
+  h1,
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p,
+  li {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileandbiography img {
+    max-width: 150px;
+  }
+
+  .projectsImagesSection img {
+    max-width: 150px;
+  }
+
+  h1,
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  p,
+  li {
+    font-size: 0.9rem;
+  }
+
+  section {
+    margin: 1rem 1.5%;
+  }
+}

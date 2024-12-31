@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .flex-row {
+            display: flex;
+        }
+
+        .form-section {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 15px;
+        }
+
+        .form-section h2 {
+            margin: 0 0 10px;
+        }
+
+        .form-group {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            width: 150px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .table-container {
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+        }
+
+        .summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .summary div {
+            flex: 1;
+        }
+
+        .buttons {
+            text-align: right;
+            margin-top: -40px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="flex-row">
+        <div class="form-section">
+            <h2>Order Details</h2>
+            <div class="form-group">
+                <label for="customer">Customer:</label>
+                <input type="text" id="customer" value="Bon app'">
+            </div>
+            <div class="form-group">
+                <label for="employee">Employee:</label>
+                <input type="text" id="employee" value="Peacock">
+            </div>
+            <div class="form-group">
+                <label for="order-date">Order Date:</label>
+                <input type="date" id="order-date" value="1998-05-06">
+            </div>
+            <div class="form-group">
+                <label for="required-date">Required Date:</label>
+                <input type="date" id="required-date" value="1998-06-03">
+            </div>
+            <div class="form-group">
+                <label for="shipped-date">Shipped Date:</label>
+                <input type="date" id="shipped-date">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Shipping Address</h2>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" value="12, rue des Bouchers">
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" value="Marseille">
+            </div>
+            <div class="form-group">
+                <label for="postal-code">Postal Code:</label>
+                <input type="text" id="postal-code" value="13008">
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" value="France">
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Discount</th>
+                <th>Category</th>
+                <th>Supplier</th>
+                <th>Extended Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Grandma's Boysenberry Spread</td>
+                <td>$25.00</td>
+                <td>20</td>
+                <td>25.00%</td>
+                <td>Condiments</td>
+                <td>Grandma Kelly's Homestead</td>
+                <td>$375.00</td>
+            </tr>
+            <tr>
+                <td>Tofu</td>
+                <td>$23.25</td>
+                <td>20</td>
+                <td>25.00%</td>
+                <td>Produce</td>
+                <td>Mayumi's</td>
+                <td>$348.75</td>
+            </tr>
+            <tr>
+                <td>Teatime Chocolate Biscuits</td>
+                <td>$9.20</td>
+                <td>10</td>
+                <td>25.00%</td>
+                <td>Confections</td>
+                <td>Specialty Biscuits, Ltd.</td>
+                <td>$69.00</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="summary">
+            <div>
+                <p>Subtotal: $792.75</p>
+                <p>Freight: $38.28</p>
+                <p>Total: $831.03</p>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="ship-name">Ship Name:</label>
+                    <input type="text" id="ship-name" value="Bon app'">
+                </div>
+                <div class="form-group">
+                    <label for="ship-via">Ship Via:</label>
+                    <select id="ship-via">
+                        <option value="ups" selected>United Package</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button id="ok-button">OK</button>
+        <button id="delete-button">Delete</button>
+        <button id="cancel-button">Cancel</button>
+    </div>
+</div>
+
+<script>
+    // Get references to buttons and inputs
+    const okButton = document.getElementById('ok-button');
+    const deleteButton = document.getElementById('delete-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const shippedDateInput = document.getElementById('shipped-date');
+    const originalValues = {
+        customer: document.getElementById('customer').value,
+        employee: document.getElementById('employee').value,
+        orderDate: document.getElementById('order-date').value,
+        requiredDate: document.getElementById('required-date').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        postalCode: document.getElementById('postal-code').value,
+        country: document.getElementById('country').value
+    };
+
+    // OK Button: Simulate confirming the order and setting shipped date, then download JSON file
+    okButton.addEventListener('click', function() {
+        const today = new Date();
+        shippedDateInput.value = today.toISOString().split('T')[0]; // Set today's date
+        alert('Order confirmed!');
+
+        // Gather data into a JSON object
+        const orderData = {
+            customer: document.getElementById('customer').value,
+            employee: document.getElementById('employee').value,
+            orderDate: document.getElementById('order-date').value,
+            requiredDate: document.getElementById('required-date').value,
+            shippedDate: document.getElementById('shipped-date').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            postalCode: document.getElementById('postal-code').value,
+            country: document.getElementById('country').value,
+            shipping: {
+                shipName: document.getElementById('ship-name').value,
+                shipVia: document.getElementById('ship-via').value
+            },
+            products: [
+                {
+                    name: "Grandma's Boysenberry Spread",
+                    unitPrice: 25.00,
+                    quantity: 20,
+                    discount: 25.00,
+                    category: "Condiments",
+                    supplier: "Grandma Kelly's Homestead",
+                    extendedPrice: 375.00
+                },
+                {
+                    name: "Tofu",
+                    unitPrice: 23.25,
+                    quantity: 20,
+                    discount: 25.00,
+                    category: "Produce",
+                    supplier: "Mayumi's",
+                    extendedPrice: 348.75
+                },
+                {
+                    name: "Teatime Chocolate Biscuits",
+                    unitPrice: 9.20,
+                    quantity: 10,
+                    discount: 25.00,
+                    category: "Confections",
+                    supplier: "Specialty Biscuits, Ltd.",
+                    extendedPrice: 69.00
+                }
+            ],
+            summary: {
+                subtotal: 792.75,
+                freight: 38.28,
+                total: 831.03
+            }
+        };
+
+        // Create a Blob from the JSON data
+        const blob = new Blob([JSON.stringify(orderData, null, 2)], { type: 'application/json' });
+
+        // Create a link element to download the JSON file
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'order_data.json';
+
+        // Trigger the download
+        link.click();
+    });
+
+    // Delete Button: Store the data in JSON, then reset the form fields
+    deleteButton.addEventListener('click', function() {
+        // Gather form data into a JSON object before deleting it
+        const deletedData = {
+            customer: document.getElementById('customer').value,
+            employee: document.getElementById('employee').value,
+            orderDate: document.getElementById('order-date').value,
+            requiredDate: document.getElementById('required-date').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            postalCode: document.getElementById('postal-code').value,
+            country: document.getElementById('country').value
+        };
+
+        // Optionally download the deleted data as JSON
+        const blob = new Blob([JSON.stringify(deletedData, null, 2)], { type: 'application/json' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'deleted_order_data.json';
+        link.click();
+
+        // Reset the form fields to empty values
+        document.getElementById('customer').value = '';
+        document.getElementById('employee').value = '';
+        document.getElementById('order-date').value = '';
+        document.getElementById('required-date').value = '';
+        document.getElementById('shipped-date').value = '';
+        document.getElementById('address').value = '';
+        document.getElementById('city').value = '';
+        document.getElementById('postal-code').value = '';
+        document.getElementById('country').value = '';
+        alert('Order deleted and form reset.');
+    });
+
+    // Cancel Button: Revert to original values
+    cancelButton.addEventListener('click', function() {
+        document.getElementById('customer').value = originalValues.customer;
+        document.getElementById('employee').value = originalValues.employee;
+        document.getElementById('order-date').value = originalValues.orderDate;
+        document.getElementById('required-date').value = originalValues.requiredDate;
+        document.getElementById('address').value = originalValues.address;
+        document.getElementById('city').value = originalValues.city;
+        document.getElementById('postal-code').value = originalValues.postalCode;
+        document.getElementById('country').value = originalValues.country;
+    });
+</script>
+</body>
+</html>

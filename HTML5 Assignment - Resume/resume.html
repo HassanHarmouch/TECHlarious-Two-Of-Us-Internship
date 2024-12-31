@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Resume / Portfolio</title>
+    <link rel="stylesheet" href="resume.css" />
+  </head>
+  <body>
+    <!-- Profile Section -->
+    <header id="header">
+      <h1>Full Name</h1>
+      <h1>MERN Stack Intern - TECHlarious & Two Of Us</h1>
+    </header>
+
+    <!-- Work Experience Timeline -->
+    <section class="profileandbiography">
+      <img src="profile.webp" alt="Profile Picture" />
+      <p>
+        I have consistently demonstrated my technical proficiency as a top-performing student majoring in computer and communication engineering. My expertise in front-end and back-end web development technologies is based on my fundamental understanding of HTML, CSS, Java, JavaScript, MySQL, and PHP. I am great at encouraging cooperation, delivering results, and ensuring that projects are successful from beginning to end. I have shown leadership in managing teams and projects.
+      </p>
+    </section>
+
+    <section>
+      <h2>Work Experience</h2>
+      <ul>
+        <li>
+          <h3>Job Title - Company Name</h3>
+          <p>Duration: Mar 2020 - Dec 2024</p>
+          <ul>
+            <li>Key responsibilities and accomplishments in this role.</li>
+            <li>Key responsibilities and accomplishments in this role.</li>
+            <li>Key responsibilities and accomplishments in this role.</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <h3>Job Title - Company Name</h3>
+          <p>Duration: Mar 2018 - Dec 2019</p>
+          <ul>
+            <li>Key responsibilities and accomplishments in this role.</li>
+            <li>Key responsibilities and accomplishments in this role.</li>
+            <li>Key responsibilities and accomplishments in this role.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Projects Showcase -->
+    <section class="projects">
+      <h2>Projects Showcase</h2>
+      <div>
+        <h3><strong>MedShare:</strong></h3>
+        A groundbreaking platform aiming to make medicines accessible to everyone free of cost while ensuring safety and efficacy. Key features:
+        <ul>
+          <li>Connects donors, recipients, donation centers (healthcare), and admins to facilitate pharmaceutical donations.</li>
+          <li>Donors can securely list and donate surplus medicines with unlimited submissions.</li>
+          <li>Recipients can browse, request, and receive medicines with prescription verification when required.</li>
+          <li>Ensures safety and legal compliance through professional verification at donation centers.</li>
+          <li>Prevents medicine waste and enhances public health accessibility.</li>
+        </ul>
+      </div>
+      <div class="projectsImagesSection">
+        <img src="p1.jfif" alt="MedShare Project Image 1" width="300" />
+        <img src="p1'.jfif" alt="MedShare Project Image 2" width="300" />
+      </div>
+    </section>
+
+    <!-- Skills Chart -->
+    <section>
+      <h2>Skills</h2>
+      <ul>
+        <li>HTML - Expert</li>
+        <li>CSS - Intermediate</li>
+        <li>JavaScript - Advanced</li>
+        <li>Python - Intermediate</li>
+        <li>MongoDB - Beginner</li>
+        <li>Node.js - Beginner</li>
+        <li>Express.js - Beginner</li>
+        <li>React - Intermediate</li>
+      </ul>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form">
+      <h2>Contact Me</h2>
+      <form id="contactForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <label for="referrer">How did you hear about me?</label>
+        <select id="referrer" name="referrer">
+          <option value="linkedin">LinkedIn</option>
+          <option value="friend">Friend</option>
+          <option value="search-engine">Search Engine</option>
+        </select>
+
+        <button type="button" onclick="downloadJSON()">Send Message</button>
+      </form>
+    </section>
+
+    <script>
+      function downloadJSON() {
+        const form = document.getElementById('contactForm');
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+          data[key] = value;
+        });
+
+        const jsonString = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'contact_data.json';
+        link.click();
+      }
+    </script>
+  </body>
+</html>
