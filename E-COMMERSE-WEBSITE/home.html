@@ -3,195 +3,234 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HASSAN-E-Commerce</title>
+  <title>E-Commerce</title>
   <style>
     /* Global styles */
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #4facfe, #00f2fe);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    header {
-      background-color: #000;
-      color: #fff;
-      width: 100%;
-      padding: 20px 0;
-      text-align: center;
-    }
+header {
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+}
 
-    header nav a {
-      color: #fff;
-      margin: 0 20px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+header nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .logout-btn {
-      background-color: #e74c3c;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+header nav a {
+  color: #fff;
+  margin: 0 20px;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-    .logout-btn:hover {
-      background-color: #c0392b;
-    }
+header nav a:hover {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-    main {
-      padding: 40px 10%;
-      width: 80%;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
-      border-radius: 8px;
-      display: flex;
-    }
+#home {
+  background-color: blue;
+}
 
-    .sidebar {
-      width: 20%;
-      padding: 20px;
-      background-color: #f7f7f7;
-      border-right: 1px solid #ddd;
-    }
+#home:hover {
+  background-color: #2980b9;
+  transform: scale(1.1); /* Adds a scaling effect when hovered */
+}
 
-    .filter-section {
-      margin-bottom: 20px;
-    }
+#cart {
+  background-color: green;
+}
 
-    .filter-section h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
+#cart:hover {
+  background-color: #27ae60;
+  transform: scale(1.1); /* Adds a scaling effect when hovered */
+}
 
-    .price-range {
-      margin-top: 10px;
-    }
+.logout-btn {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-    .price-range input {
-      width: 100%;
-    }
+.logout-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.1); /* Adds a scaling effect when hovered */
+}
 
-    .filter-button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      background-color: #27ae60;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-    }
+main {
+  padding: 40px 10%;
+  width: 80%;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  border-radius: 8px;
+  display: flex;
+}
 
-    .filter-button:hover {
-      background-color: #219150;
-    }
+.sidebar {
+  width: 20%;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-right: 1px solid #ddd;
+}
 
-    .content {
-      flex: 1;
-      padding: 20px;
-    }
+.filter-section {
+  margin-bottom: 20px;
+}
 
-    h2 {
-      font-size: 24px;
-      margin-bottom: 30px;
-      text-align: center;
-    }
+.filter-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
 
-    .search-bar {
-      margin-bottom: 20px;
-      text-align: center;
-    }
+.price-range {
+  margin-top: 10px;
+}
 
-    .search-bar input {
-      padding: 10px;
-      width: 80%;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
+.price-range input {
+  width: 100%;
+}
 
-    #product-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-    }
+.filter-button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
 
-    .product {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      text-align: center;
-    }
+.filter-button:hover {
+  background-color: #219150;
+}
 
-    .product:hover {
-      transform: translateY(-10px);
-    }
+.content {
+  flex: 1;
+  padding: 20px;
+}
 
-    .product img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+}
 
-    .product-info {
-      padding: 15px;
-    }
+.search-bar {
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-    .product-name {
-      font-size: 18px;
-      font-weight: bold;
-    }
+.search-bar input {
+  padding: 10px;
+  width: 80%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
 
-    .product-price {
-      font-size: 16px;
-      color: #27ae60;
-    }
+#product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
 
-    .add-to-cart {
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
-      border: none;
-      width: 100%;
-      cursor: pointer;
-    }
+.product {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, border 0.3s ease;
+  text-align: center;
+  margin: 10px;
+  padding: 15px;
+}
 
-    .add-to-cart:hover {
-      background-color: #555;
-    }
+.product:hover {
+  transform: translateY(-10px);
+  border: 3px solid green; /* Adds a border on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Adds a stronger shadow on hover */
+}
 
-    #recommendations {
-      margin-top: 40px;
-    }
+.product img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
-    #recommendations h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+.product-info {
+  padding: 15px;
+}
 
-    #recommended-products {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.product-price {
+  font-size: 16px;
+  color: #27ae60;
+}
+
+.add-to-cart {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.add-to-cart:hover {
+  background-color: #555;
+}
+
+#recommendations {
+  margin-top: 40px;
+}
+
+#recommendations h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#recommended-products {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
   </style>
 </head>
 <body>
   <header>
-    <h1>HASSAN-E-Commerce-Website</h1>
+    <h1>E-Commerce-Website</h1>
     <nav>
       <a href="home.html" id="home">Home</a>
       <a href="cart.html" id="cart">Cart</a>
@@ -209,7 +248,7 @@
           <input type="range" id="price-range" min="0" max="1000" step="10" oninput="updatePriceLabel()" />
           <p>Selected Price: $<span id="price-label">500</span></p>
         </div>
-        <button class="filter-button" onclick="applyPriceFilter()">Apply Filter</button>
+        <button class="filter-button" onclick="applyPriceFilter()">Apply Price Filter</button>
       </div>
       <div class="filter-section">
         <h3>Filter by Item</h3>
@@ -220,7 +259,7 @@
           <option value="fashion">Fashion</option>
           <option value="home-appliances">Home Appliances</option>
         </select>
-        <button class="filter-button" onclick="applyItemFilter()">Apply Filter</button>
+        <button class="filter-button" onclick="applyItemFilter()">Apply Category Filter</button>
       </div>
     </div>
 
@@ -253,18 +292,18 @@
     }
 
     function applyPriceFilter() {
-  const selectedPrice = document.getElementById('price-range').value;
-  const filteredProducts = products.filter(product => parseFloat(product.price) <= parseFloat(selectedPrice));
-  renderProducts(filteredProducts);
-}
+      const selectedPrice = document.getElementById('price-range').value;
+      const filteredProducts = products.filter(product => parseFloat(product.price) <= parseFloat(selectedPrice));
+      renderProducts(filteredProducts);
+    }
 
-function applyItemFilter() {
-  const selectedCategory = document.getElementById('item-category').value;
-  const filteredProducts = selectedCategory === 'all' 
-    ? products
-    : products.filter(product => product.category === selectedCategory); // Assuming each product has a 'category' field
-  renderProducts(filteredProducts);
-}
+    function applyItemFilter() {
+      const selectedCategory = document.getElementById('item-category').value;
+      const filteredProducts = selectedCategory === 'all' 
+        ? products
+        : products.filter(product => product.category === selectedCategory); // Assuming each product has a 'category' field
+      renderProducts(filteredProducts);
+    }
 
     // Product data (sample)
     const products = [
@@ -501,39 +540,6 @@ function applyItemFilter() {
 
       localStorage.setItem('cart', JSON.stringify(cart));
       renderProducts(products);  // Rerender with all products after adding to the cart
-    }
-
-    function getRecommendations() {
-      recommendations.innerHTML = ''; // Clear existing recommendations
-      const recommendedProducts = products.slice(0, 3); // Example: First 3 products
-      recommendedProducts.forEach((product, index) => {
-        const inCart = cart.find(item => item.name === product.name);
-        const availableQuantity = inCart ? product.quantity - inCart.quantity : product.quantity;
-
-        const productCard = `
-          <div class="product">
-            <img src="${product.image}" alt="${product.name}" />
-            <div class="product-info">
-              <div class="product-name">${product.name}</div>
-              <div class="product-price">$${product.price}</div>
-              <div class="product-quantity">Available: ${availableQuantity}</div>
-              <div class="product-description">${product.description}</div>
-              <div class="product-rating">Rating: ${product.rating}★</div>
-              <button class="add-to-cart" ${availableQuantity <= 0 ? 'disabled' : ''}>Add to Cart</button>
-            </div>
-          </div>`;
-        
-        const productDiv = document.createElement('div');
-        productDiv.innerHTML = productCard;
-
-        const addToCartButton = productDiv.querySelector('.add-to-cart');
-        addToCartButton.addEventListener('click', () => {
-          addToCart(index);
-          alert(`${product.name} has been added to your cart!`);
-        });
-
-        recommendations.appendChild(productDiv);
-      });
     }
 
     function filterProducts() {
