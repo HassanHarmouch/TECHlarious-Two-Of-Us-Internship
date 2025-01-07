@@ -195,7 +195,6 @@
     <div class="total-container">
       <p>Subtotal: $<span id="subtotal">0.00</span></p>
       <p>Discount: $<span id="discount">0.00</span></p>
-      <p>Delivery / Taxes: $<span id="taxes">0.00</span></p>
       <p>Final Total: $<span id="final-total">0.00</span></p>
       <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
       <button class="checkout-btn" onclick="checkout()">Checkout</button>
@@ -208,7 +207,6 @@
     const cartTableBody = document.querySelector('#cart-table tbody');
     const subtotalElement = document.getElementById('subtotal');
     const discountElement = document.getElementById('discount');
-    const taxesElement = document.getElementById('taxes');
     const finalTotalElement = document.getElementById('final-total');
     const emptyCartMessage = document.getElementById('empty-cart-message');
 
@@ -217,14 +215,12 @@
       cartTableBody.innerHTML = '';
       let subtotal = 0;
       let discount = 0;
-      let taxes = 0;
 
       if (cartItems.length === 0) {
         emptyCartMessage.style.display = 'block';
         cartTableBody.style.display = 'none';
         subtotalElement.textContent = '0.00';
         discountElement.textContent = '0.00';
-        taxesElement.textContent = '0.00';
         finalTotalElement.textContent = '0.00';
         return;
       } else {
@@ -234,10 +230,10 @@
 
       cartItems.forEach((item, index) => {
         let discountedPrice = item.price;
-        let itemTotal = (item.price * item.quantity).toFixed(2);
+        let itemTotal = (item.price * item.quantity).toFixed(2); // Total without discount
         
- // Apply "Buy 2, Get 1 Free" logic for 3 or more items
-      if (item.quantity >= 3) {
+        // Apply "Buy 2, Get 1 Free" logic for 3 or more items
+        if (item.quantity >= 3) {
           let priceForDiscount = item.price * Math.floor(item.quantity / 3 * 2) + item.price * (item.quantity % 3);
           discountedPrice = (priceForDiscount / item.quantity).toFixed(2);
           itemTotal = (priceForDiscount).toFixed(2);
@@ -247,8 +243,9 @@
           discountedPrice = 0; // Original price for 1 item
         }
 
+        // Add to subtotal and calculate discount
         subtotal += parseFloat(itemTotal);
-
+        discount += item.price * item.quantity - parseFloat(itemTotal); // Calculate total discount per item
         const row = document.createElement('tr');
         row.innerHTML = `
           <td><img src="${item.image}" alt="${item.name}" class="cart-item img-fluid d-block mx-auto" /></td>
@@ -264,13 +261,12 @@
         cartTableBody.appendChild(row);
       });
 
-      discount = subtotal * 0.1; // Example: 10% discount
-      taxes = subtotal * 0.08; // Example: 8% taxes
-      const finalTotal = subtotal - discount + taxes;
+      // Calculate the final total
+      const finalTotal = subtotal - discount;
 
+      // Update the DOM
       subtotalElement.textContent = subtotal.toFixed(2);
       discountElement.textContent = discount.toFixed(2);
-      taxesElement.textContent = taxes.toFixed(2);
       finalTotalElement.textContent = finalTotal.toFixed(2);
     }
 
@@ -287,15 +283,14 @@
     }
 
     function clearCart() {
-  if (confirm('Are you sure you want to clear your cart?')) {
-    localStorage.removeItem('cart');
-    cartItems.length = 0;
-    updateCart();
-    alert('Your cart has been cleared!');
-    window.location.href = 'home.html'; // Redirect to home page
-  }
-}
-
+      if (confirm('Are you sure you want to clear your cart?')) {
+        localStorage.removeItem('cart');
+        cartItems.length = 0;
+        updateCart();
+        alert('Your cart has been cleared!');
+        window.location.href = 'home.html'; // Redirect to home page
+      }
+    }
 
     function checkout() {
       if (cartItems.length === 0) {
@@ -303,7 +298,6 @@
       } else {
         window.location.href = 'checkout.html'; // Redirect to checkout page
       }
-      // You can redirect to the checkout page here
     }
 
     // Call updateCart to initially load the cart
@@ -315,8 +309,7 @@
       alert('Logged out!');
       window.location.href = 'login.html'; // Redirect to login page
     }
-  </script>
-
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
