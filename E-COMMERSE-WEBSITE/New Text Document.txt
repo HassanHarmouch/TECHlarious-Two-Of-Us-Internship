@@ -211,13 +211,13 @@ h2 {
 }
 
 #recommendations {
-      margin-top: 40px;
-    }
+  margin-top: 40px;
+}
 
-    #recommendations h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+#recommendations h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
 #recommended-products {
   display: flex;
@@ -285,7 +285,6 @@ h2 {
   </main>
 
   <script>
-    
     function updatePriceLabel() {
       const priceRange = document.getElementById('price-range');
       const priceLabel = document.getElementById('price-label');
@@ -560,38 +559,6 @@ h2 {
     alert('You have been logged out and your cart has been cleared!');
     window.location.href = 'index.html'; // Redirect to login page
   }
-  function getRecommendations() {
-      recommendations.innerHTML = ''; // Clear existing recommendations
-      const recommendedProducts = products.slice(0, 3); // Example: First 3 products
-      recommendedProducts.forEach((product, index) => {
-        const inCart = cart.find(item => item.name === product.name);
-        const availableQuantity = inCart ? product.quantity - inCart.quantity : product.quantity;
-
-        const productCard = `
-          <div class="product">
-            <img src="${product.image}" alt="${product.name}" />
-            <div class="product-info">
-              <div class="product-name">${product.name}</div>
-              <div class="product-price">$${product.price}</div>
-              <div class="product-quantity">Available: ${availableQuantity}</div>
-              <div class="product-description">${product.description}</div>
-              <div class="product-rating">Rating: ${product.rating}★</div>
-              <button class="add-to-cart" ${availableQuantity <= 0 ? 'disabled' : ''}>Add to Cart</button>
-            </div>
-          </div>`;
-        
-        const productDiv = document.createElement('div');
-        productDiv.innerHTML = productCard;
-
-        const addToCartButton = productDiv.querySelector('.add-to-cart');
-        addToCartButton.addEventListener('click', () => {
-          addToCart(index);
-          alert(`${product.name} has been added to your cart!`);
-        });
-
-        recommendations.appendChild(productDiv);
-      });
-    }
 
     // Initialize the page
     renderProducts(products);
